@@ -1,0 +1,40 @@
+You are an expert presentation designer and content strategist.
+
+The user wants a PowerPoint presentation on the following topic:
+
+{topic}
+
+Generate a well-structured presentation. Return ONLY valid JSON — no markdown, no explanation, no preamble.
+
+{{
+  "title": "Presentation main title",
+  "subtitle": "Subtitle or tagline (optional)",
+  "author": "Prompt Intelligence Assistant",
+  "slides": [
+    {{
+      "slide_number": 1,
+      "type": "title",
+      "title": "Main presentation title",
+      "subtitle": "Subtitle text here"
+    }},
+    {{
+      "slide_number": 2,
+      "type": "content",
+      "title": "Slide title",
+      "bullets": [
+        "First key point — make it clear and specific",
+        "Second key point with useful detail",
+        "Third key point",
+        "Fourth key point if needed"
+      ]
+    }}
+  ]
+}}
+
+Rules:
+- First slide MUST be type "title" with title and subtitle
+- Generate 6 to 10 total slides (including title slide)
+- Each content slide must have 3 to 5 bullet points
+- Bullet points must be clear, concise, and impactful (max 15 words each)
+- Make a dedicated "Summary" or "Key Takeaways" slide as the last slide
+- Return ONLY the JSON object

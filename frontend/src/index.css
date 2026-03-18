@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── CSS Design Tokens ── */
+:root {
+  --bg-base:        #f8f7ff;
+  --bg-surface:     #ffffff;
+  --bg-elevated:    #f1f0ff;
+  --bg-overlay:     rgba(255,255,255,0.8);
+  --border:         rgba(99,102,241,0.12);
+  --border-strong:  rgba(99,102,241,0.25);
+  --text-primary:   #1e1b4b;
+  --text-secondary: #4b5563;
+  --text-muted:     #9ca3af;
+  --accent:         #4f46e5;
+  --accent-soft:    rgba(79,70,229,0.08);
+  --accent-glow:    rgba(99,102,241,0.25);
+  --sidebar-bg:     #ffffff;
+  --sidebar-border: rgba(99,102,241,0.1);
+  --chat-user-bg:   linear-gradient(135deg,#4f46e5,#7c3aed);
+  --chat-ai-bg:     #ffffff;
+  --chat-ai-border: rgba(99,102,241,0.12);
+  --input-bg:       #ffffff;
+  --input-border:   rgba(99,102,241,0.2);
+  --scrollbar:      rgba(99,102,241,0.2);
+  --scrollbar-hover:rgba(99,102,241,0.4);
+  --shadow-sm:      0 1px 3px rgba(79,70,229,0.08), 0 1px 2px rgba(79,70,229,0.04);
+  --shadow-md:      0 4px 16px rgba(79,70,229,0.1), 0 2px 6px rgba(79,70,229,0.06);
+  --shadow-lg:      0 8px 32px rgba(79,70,229,0.14), 0 4px 12px rgba(79,70,229,0.08);
+}
+
+.dark {
+  --bg-base:        #0a0914;
+  --bg-surface:     #110f1e;
+  --bg-elevated:    #181628;
+  --bg-overlay:     rgba(17,15,30,0.85);
+  --border:         rgba(99,102,241,0.12);
+  --border-strong:  rgba(99,102,241,0.28);
+  --text-primary:   #f0eeff;
+  --text-secondary: #a5a3c4;
+  --text-muted:     #5c5a7a;
+  --accent:         #6366f1;
+  --accent-soft:    rgba(99,102,241,0.1);
+  --accent-glow:    rgba(99,102,241,0.3);
+  --sidebar-bg:     #0d0c1a;
+  --sidebar-border: rgba(99,102,241,0.08);
+  --chat-user-bg:   linear-gradient(135deg,#4338ca,#6d28d9);
+  --chat-ai-bg:     #181628;
+  --chat-ai-border: rgba(99,102,241,0.1);
+  --input-bg:       #181628;
+  --input-border:   rgba(99,102,241,0.18);
+  --scrollbar:      rgba(99,102,241,0.15);
+  --scrollbar-hover:rgba(99,102,241,0.35);
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md:      0 4px 16px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.2);
+  --shadow-lg:      0 8px 32px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ── Base ── */
+@layer base {
+  * { box-sizing: border-box; }
+  html { font-feature-settings: 'cv02','cv03','cv04','cv11'; }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    background: rgba(99,102,241,0.3);
+    color: var(--text-primary);
+  }
+}
+
+/* ── Scrollbars ── */
+@layer utilities {
+  .scrollbar-hide { -ms-overflow-style:none; scrollbar-width:none; }
+  .scrollbar-hide::-webkit-scrollbar { display:none; }
+
+  .scrollbar-chat { scrollbar-width: thin; scrollbar-color: var(--scrollbar) transparent; }
+  .scrollbar-chat::-webkit-scrollbar { width: 5px; }
+  .scrollbar-chat::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-chat::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 9999px; }
+  .scrollbar-chat::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-hover); }
+
+  .scrollbar-sidebar { scrollbar-width: thin; scrollbar-color: var(--scrollbar) transparent; }
+  .scrollbar-sidebar::-webkit-scrollbar { width: 3px; }
+  .scrollbar-sidebar::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-sidebar::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 9999px; }
+
+  .glass {
+    background: var(--bg-overlay);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid var(--border);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, var(--bg-elevated) 25%, var(--bg-surface) 50%, var(--bg-elevated) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+  }
+
+  .focus-glow:focus-within {
+    box-shadow: 0 0 0 3px var(--accent-glow), var(--shadow-md);
+  }
+}
+
+/* ── Surface token classes ── */
+.bg-base       { background-color: var(--bg-base); }
+.bg-surface    { background-color: var(--bg-surface); }
+.bg-elevated   { background-color: var(--bg-elevated); }
+.border-theme  { border-color: var(--border); }
+.text-primary  { color: var(--text-primary); }
+.text-secondary{ color: var(--text-secondary); }
+.text-muted    { color: var(--text-muted); }
+
+/* ────────────────────────────────────────────────────────────────────────────
+   OVERFLOW FIX — prevents long unbroken strings (URLs, hashes, encoded params)
+   from breaking the chat bubble layout and overflowing the page.
+   Applies globally to all chat bubbles and any container that might receive
+   user-pasted content.
+────────────────────────────────────────────────────────────────────────────── */
+.msg-bubble {
+  overflow-wrap: anywhere;
+  word-break:    break-word;
+  min-width:     0;
+}
+
+/* Also protect the flex parent row from expanding beyond viewport */
+.msg-row {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* ── Prose (Agent mode markdown) ── */
+.prose pre {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.8125rem;
+  overflow-x: auto;
+}
+.prose code:not(pre code) {
+  background: var(--accent-soft);
+  color: #818cf8;
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+.prose code:not(pre code)::before,
+.prose code:not(pre code)::after { content: none; }
+.prose a { color: var(--accent); text-decoration: none; }
+.prose a:hover { text-decoration: underline; }
+.prose hr { border-color: var(--border); }
+.prose blockquote { border-left-color: var(--accent); color: var(--text-secondary); font-style: normal; }
+.prose blockquote p::before, .prose blockquote p::after { content: none; }
+.prose strong { color: var(--text-primary); }
+.prose h1, .prose h2, .prose h3, .prose h4 { color: var(--text-primary); }
+.prose p { color: var(--text-secondary); line-height: 1.75; }
+.prose li { color: var(--text-secondary); }
+
+/* ── Message bubble animations ── */
+.msg-enter { animation: slideUp 0.25s ease-out; }
+
+/* ── Custom focus ring ── */
+input:focus, textarea:focus, button:focus-visible { outline: none; }
+
+/* ── Theme transitions ── */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+.animate-bounce, .animate-spin, .animate-pulse,
+.animate-fade-in, .animate-slide-up, .animate-glow-pulse, .animate-float {
+  transition: none !important;
+}

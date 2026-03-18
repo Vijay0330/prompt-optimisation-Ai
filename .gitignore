@@ -1,0 +1,65 @@
+# ═══════════════════════════════════════════════════════════════
+#  Prompt Intelligence Assistant — .gitignore
+# ═══════════════════════════════════════════════════════════════
+
+# ── Secrets — NEVER commit these ────────────────────────────────
+backend/.env
+.env
+.env.local
+.env.production
+
+# ── Python ───────────────────────────────────────────────────────
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/**/*.pyc
+backend/**/*.pyo
+backend/**/*.pyd
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── ChromaDB — vector database (auto-seeded at startup) ─────────
+backend/chroma_db/
+
+# ── ML model weights — stored on HuggingFace Hub instead ────────
+backend/trained_model/
+backend/scripts/__pycache__/
+
+# ── Node / Frontend ──────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/coverage/
+*.local
+
+# ── OS files ─────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ── Editor ───────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Logs ─────────────────────────────────────────────────────────
+*.log
+logs/
+backend/trained_model/logs/
+backend/trained_model/checkpoints/
+
+# ── Test / coverage ──────────────────────────────────────────────
+.pytest_cache/
+htmlcov/
+.coverage

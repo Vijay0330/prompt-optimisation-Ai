@@ -1,0 +1,124 @@
+{
+  "tools": [
+    {
+      "name": "Vector Database",
+      "category": "AI Infrastructure",
+      "use_cases": ["semantic search", "document retrieval", "RAG systems", "embeddings", "similarity search"],
+      "description": "Stores embeddings and enables fast similarity/semantic search for AI applications."
+    },
+    {
+      "name": "Python Data Analysis",
+      "category": "Data Science",
+      "use_cases": ["data analysis", "machine learning", "data preprocessing", "statistics", "pandas", "numpy"],
+      "description": "Used for ML pipelines, statistical analysis, and data processing workflows."
+    },
+    {
+      "name": "Web Scraper",
+      "category": "Data Collection",
+      "use_cases": ["web scraping", "dataset generation", "data extraction", "crawling", "content collection"],
+      "description": "Extracts structured data from websites for dataset creation and monitoring."
+    },
+    {
+      "name": "LLM API Integration",
+      "category": "AI Infrastructure",
+      "use_cases": ["language model", "text generation", "summarization", "question answering", "chat", "AI assistant"],
+      "description": "Connects to large language model APIs like OpenAI, Gemini, or Anthropic for AI-powered text tasks."
+    },
+    {
+      "name": "REST API Builder",
+      "category": "Backend Development",
+      "use_cases": ["api development", "backend", "REST", "FastAPI", "Flask", "endpoints", "web service"],
+      "description": "Framework for building and exposing REST APIs to serve data or trigger actions."
+    },
+    {
+      "name": "SQL Database",
+      "category": "Data Storage",
+      "use_cases": ["database", "SQL", "structured data", "relational", "PostgreSQL", "MySQL", "data storage"],
+      "description": "Relational database for storing and querying structured data with SQL."
+    },
+    {
+      "name": "NoSQL Database",
+      "category": "Data Storage",
+      "use_cases": ["nosql", "MongoDB", "document store", "unstructured data", "flexible schema", "JSON storage"],
+      "description": "Document or key-value store for flexible, schema-less data storage."
+    },
+    {
+      "name": "Authentication & Auth",
+      "category": "Security",
+      "use_cases": ["authentication", "authorization", "login", "JWT", "OAuth", "user management", "security"],
+      "description": "Handles user authentication, JWT tokens, OAuth flows, and role-based access control."
+    },
+    {
+      "name": "Cloud Storage",
+      "category": "Infrastructure",
+      "use_cases": ["file storage", "S3", "upload", "images", "documents", "blob storage", "CDN"],
+      "description": "Stores files, images, and documents in scalable cloud storage buckets."
+    },
+    {
+      "name": "Task Queue / Background Jobs",
+      "category": "Backend Development",
+      "use_cases": ["background jobs", "async tasks", "celery", "queue", "scheduled tasks", "worker"],
+      "description": "Processes long-running or scheduled tasks asynchronously without blocking the main thread."
+    },
+    {
+      "name": "Data Visualization",
+      "category": "Data Science",
+      "use_cases": ["visualization", "charts", "graphs", "dashboard", "plotting", "matplotlib", "D3"],
+      "description": "Creates interactive charts, dashboards, and visual reports from data."
+    },
+    {
+      "name": "CI/CD Pipeline",
+      "category": "DevOps",
+      "use_cases": ["deployment", "CI/CD", "automation", "testing", "GitHub Actions", "build pipeline"],
+      "description": "Automates testing, building, and deploying applications on code changes."
+    },
+    {
+      "name": "Email & Notification Service",
+      "category": "Communication",
+      "use_cases": ["email", "notifications", "alerts", "SMTP", "SendGrid", "messaging", "push notifications"],
+      "description": "Sends transactional emails, push notifications, and automated alerts."
+    },
+    {
+      "name": "React Frontend",
+      "category": "Frontend Development",
+      "use_cases": ["frontend", "UI", "web app", "React", "user interface", "SPA", "dashboard UI"],
+      "description": "Builds interactive single-page web applications and dashboards."
+    },
+    {
+      "name": "Docker & Containerization",
+      "category": "DevOps",
+      "use_cases": ["docker", "containers", "deployment", "microservices", "kubernetes", "packaging"],
+      "description": "Packages and runs applications in isolated containers for consistent deployments."
+    },
+    {
+      "name": "Web Search API",
+      "category": "Data Collection",
+      "use_cases": ["web search", "internet search", "real-time data", "news", "search engine"],
+      "description": "Queries search engines to retrieve current information from the web."
+    },
+    {
+      "name": "Caching Layer",
+      "category": "Performance",
+      "use_cases": ["caching", "Redis", "performance", "speed", "in-memory", "response caching"],
+      "description": "Stores frequently accessed data in memory for fast retrieval and reduced latency."
+    },
+    {
+      "name": "PDF / Document Parser",
+      "category": "Data Collection",
+      "use_cases": ["PDF", "document parsing", "text extraction", "OCR", "file processing", "resume parsing"],
+      "description": "Extracts text and structured data from PDFs, Word docs, and other document formats."
+    },
+    {
+      "name": "Model Training Pipeline",
+      "category": "Machine Learning",
+      "use_cases": ["model training", "fine-tuning", "deep learning", "neural network", "PyTorch", "TensorFlow"],
+      "description": "Builds, trains, and evaluates machine learning or deep learning models."
+    },
+    {
+      "name": "Monitoring & Logging",
+      "category": "DevOps",
+      "use_cases": ["monitoring", "logging", "observability", "error tracking", "metrics", "Sentry", "alerts"],
+      "description": "Tracks application health, logs errors, and sends alerts on failures."
+    }
+  ]
+}

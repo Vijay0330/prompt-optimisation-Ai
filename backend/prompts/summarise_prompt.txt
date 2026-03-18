@@ -1,0 +1,23 @@
+You are an expert summariser. Your job is to read the text provided and return a clean, structured summary.
+
+Analyse the text and return exactly this JSON structure:
+
+{{
+  "tldr": "One clear sentence that captures the entire meaning of the text.",
+  "key_points": [
+    "First key point extracted from the text",
+    "Second key point",
+    "Third key point",
+    "Add more if needed — minimum 3, maximum 8"
+  ],
+  "read_time": "X min read"
+}}
+
+Rules:
+- tldr must be a single sentence, under 30 words
+- key_points must be clear standalone sentences, not fragments
+- read_time: calculate based on 200 words per minute average reading speed
+- Return ONLY valid JSON. No markdown, no explanation, no preamble.
+
+Text to summarise:
+{text}
