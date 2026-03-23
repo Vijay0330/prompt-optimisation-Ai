@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import os
+import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
@@ -12,28 +13,37 @@ from api.auth            import router as auth_router
 from api.chats           import router as chats_router
 from api.output_routes   import router as output_router
 from api.feedback_routes import router as feedback_router
-from api.rag_routes      import router as rag_router      # ← Phase 5
+from api.rag_routes      import router as rag_router
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # ── Connect to MongoDB ────────────────────────────────────────────────────
+    # ── Connect to MongoDB — must succeed before serving requests ─────────────
     await connect_db()
 
-    # ── Phase 5: Seed ChromaDB knowledge base at startup ─────────────────────
+    # ── Seed knowledge base in background — does NOT block port binding ───────
+    # Render kills the process if port is not bound within ~60s.
+    # sentence-transformers downloads ~90MB on first run which takes >60s.
+    # Running it as a background task lets uvicorn bind the port immediately
+    # while seeding completes in the background.
+    asyncio.create_task(_seed_bg())
+
+    yield
+    await close_db()
+
+
+async def _seed_bg():
+    """Background task — seeds ChromaDB after server is already running."""
     try:
         from services.knowledge_seeder import seed_knowledge_base
         await seed_knowledge_base()
     except Exception as e:
         print(f"[Startup] Knowledge base seeding failed (non-fatal): {e}")
 
-    yield
-    await close_db()
-
 
 app = FastAPI(
     title="Prompt Intelligence Assistant",
-    description="AI workspace with RAG, custom HuggingFace model, feedback loop, and output generation",
+    description="AI workspace with RAG, HuggingFace model, feedback loop, and output generation",
     version="5.0.0",
     lifespan=lifespan,
 )
@@ -54,7 +64,7 @@ app.include_router(chats_router,    prefix="/api")
 app.include_router(prompt_router,   prefix="/api")
 app.include_router(output_router,   prefix="/api")
 app.include_router(feedback_router, prefix="/api")
-app.include_router(rag_router,      prefix="/api")       # ← Phase 5
+app.include_router(rag_router,      prefix="/api")
 
 
 @app.get("/")
