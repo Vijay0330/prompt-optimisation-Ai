@@ -18,17 +18,21 @@ from api.rag_routes      import router as rag_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # ── Connect to MongoDB — must succeed before serving requests ─────────────
-    await connect_db()
+    # ── MongoDB — connect but never crash startup on failure ──────────────────
+    # If connect_db() raises, catch it and log — uvicorn still binds the port.
+    # Requests that need DB will fail gracefully with 503 instead of killing
+    # the entire process with exit status 3.
+    try:
+        await connect_db()
+    except Exception as e:
+        print(f"[Startup] MongoDB connection failed: {e}")
+        print("[Startup] Server starting anyway — DB calls will retry.")
 
-    # ── Seed knowledge base in background — does NOT block port binding ───────
-    # Render kills the process if port is not bound within ~60s.
-    # sentence-transformers downloads ~90MB on first run which takes >60s.
-    # Running it as a background task lets uvicorn bind the port immediately
-    # while seeding completes in the background.
+    # ── Knowledge base seeding — fully non-blocking background task ───────────
     asyncio.create_task(_seed_bg())
 
     yield
+
     await close_db()
 
 
