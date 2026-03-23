@@ -2,32 +2,31 @@ services:
   - type: web
     name: prompt-intelligence-backend
     env: python
+    # Python 3.11 has pre-built wheels for ALL our dependencies.
+    # Python 3.14 (Render's default latest) does NOT have wheels for
+    # pydantic-core, hnswlib, tokenizers etc — forces Rust/C++ compilation
+    # which fails on Render's read-only build filesystem.
+    pythonVersion: "3.11.9"
     region: oregon
     plan: free
     rootDir: backend
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
-      # ── AI ─────────────────────────────────────────────────────────────
       - key: GEMINI_API_KEY
-        sync: false          # set manually in Render dashboard
-      # ── MongoDB ────────────────────────────────────────────────────────
+        sync: false
       - key: MONGODB_URI
         sync: false
       - key: MONGODB_DB_NAME
         value: AI
-      # ── JWT ────────────────────────────────────────────────────────────
       - key: JWT_SECRET
         sync: false
       - key: JWT_EXPIRE_MINUTES
         value: "10080"
-      # ── CORS — set to your Vercel URL after first deploy ───────────────
       - key: ALLOWED_ORIGINS
-        sync: false          # e.g. https://your-app.vercel.app
-      # ── App ────────────────────────────────────────────────────────────
+        sync: false
       - key: ENV
         value: production
-      # ── Phase 4: HuggingFace ───────────────────────────────────────────
       - key: HF_TOKEN
         sync: false
       - key: HF_USERNAME
@@ -38,7 +37,3 @@ services:
         value: google/flan-t5-base
       - key: AUTO_TRAIN_THRESHOLD
         value: "100"
-      # ── Phase 5: RAG ───────────────────────────────────────────────────
-      # ChromaDB runs embedded — no extra service needed
-      # chroma_db/ folder is created at runtime and is ephemeral on Render free tier
-      # Knowledge base is re-seeded on every cold start (takes ~30s)
